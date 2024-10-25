@@ -73,7 +73,7 @@ export default function Silabario() {
               />
             </motion.div>
             <motion.a
-              href="/Silabario%20Reducido%20para%20impresion.pdf"
+              href="/Silabario%20Reducido%20para%20impresion_compressed.pdf"
               download
               className="mt-6 inline-block bg-blue-400 text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg"
               whileHover={{ scale: 1.05 }}
