@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Book, Edit, FileText, HelpCircle, Star } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';  // Importa el hook useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const menuItems = [
   { title: "Problemática", icon: Book, description: "Explora desafíos de aprendizaje", route: '/problematica' },
@@ -31,6 +31,15 @@ export default function Component() {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const familyImageRef = useRef(null);
   const navigate = useNavigate();
+
+  const decorativeImages = [
+    '3animales.webp',
+    'elefanteDormido.webp',
+    'leonJugando.webp',
+    'monoMariposas.webp',
+    'elefanteMariposas.webp',
+    'leonMariposas.webp'
+  ];
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -65,9 +74,26 @@ export default function Component() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen relative overflow-x-hidden">
+      {/* Decorative Images */}
+      <div className="fixed inset-0 pointer-events-none z-10">
+        {decorativeImages.slice(0, 4).map((img, index) => (
+          <img
+            key={img}
+            src={`/${img}`}
+            alt=""
+            className={`absolute w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 object-contain transition-all duration-300 ${
+              index === 0 ? 'top-4 left-4 md:top-8 md:left-8 lg:top-16 lg:left-16' :
+              index === 1 ? 'top-4 right-4 md:top-8 md:right-8 lg:top-16 lg:right-16' :
+              index === 2 ? 'bottom-16 left-4 md:bottom-20 md:left-8 lg:bottom-24 lg:left-16' :
+              'bottom-16 right-4 md:bottom-20 md:right-8 lg:bottom-24 lg:right-16'
+            }`}
+          />
+        ))}
+      </div>
+
       {/* Contenido principal */}
-      <div className={`flex-grow flex flex-col items-center justify-between p-4 relative overflow-hidden bg-gradient-to-b ${
+      <div className={`flex-grow flex flex-col items-center justify-between p-4 relative overflow-hidden bg-gradient-to-b z-0 ${
         timeOfDay === 'morning' ? 'from-purple-800 via-indigo-600 to-blue-500' :
         timeOfDay === 'afternoon' ? 'from-blue-400 to-orange-200' :
         'from-indigo-900 to-purple-700'
